@@ -1,17 +1,15 @@
 def findMaxAverage(nums, k):
     window = []
-    window_max = [nums[0:3]]
-    for i in range(len(nums)):
-        try:
-            window.append(nums[i:i+3])
-            if sum(window) >= sum(window_max):
-                window_max = window
-        except:
-            pass
-    return int(sum(window_max)) / 4
+    window_max = nums[0:k]
+    for i in range(len(nums) - k + 1):
+        window = (nums[i:i+k])
+        if sum(window) >= sum(window_max) and window != []:
+            window_max = window.copy()
+        window.clear()
+    return sum(window_max)/k
 
 
 
-nums = [1,12,-5,-6,50,3]
-k = 4
+nums = [7,4,5,8,8,3,9,8,7,6]
+k = 7
 print(findMaxAverage(nums,k))
